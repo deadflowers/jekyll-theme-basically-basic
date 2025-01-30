@@ -1,0 +1,73 @@
+@import url("https://web.archive.org/web/20220204104735cs_/https://fonts.googleapis.com/css?family=Audiowide");
+@import url("https://web.archive.org/web/20220204104735cs_/https://fonts.googleapis.com/css?family=Raleway:400,300,600");
+@import url("https://web.archive.org/web/20220204104735cs_/https://d3uaz5bp3928j6.cloudfront.net/assets/web/css/skel.css");
+
+a:hover{
+  color:#0FA0CE!important;
+  font-weight:bolder!important;
+}
+
+.site-title > a > span {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+
+  position:absolute;
+  z-index:1000;
+  padding: 1em;
+  overflow: hidden;
+  border: none;
+  font: normal 1.5em "Audiowide", Helvetica, sans-serif;
+  text-overflow: ellipsis;
+  animation: shiftAnim 3s linear 1;
+  -webkit-animation: shiftAnim 3s linear 1;
+  max-width: 600px;
+  word-wrap: break-word;
+  line-height: 70%;
+  letter-spacing: -.5px;
+  /*margin-top: 40px;*/
+
+  color: #fcff00;
+        background: -webkit-linear-gradient(left, #fcff00, #bf0000);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+}
+
+@keyframes shiftAnim {
+ from {
+    margin-top:40px;
+    max-width: 2px;
+  }
+  to {
+    margin-top:2px;
+    max-width: 600px;
+  }
+}
+
+@-webkit-keyframes shiftAnim {
+  from {
+    margin-top:40px;
+    max-width: 2px;
+  }
+  to {
+    margin-top:2px;
+    max-width: 600px;
+  }
+}
+
+@media screen and (min-width: 700px){ 
+  .intro-title{
+    font-size:3em!important;
+  }
+  .site-title > a > span {
+    font-size:2.2em;
+  }
+}
+
+div.entry-content p{
+  font-size:1.3em!important;
+}
+
+div.entry-excerpt p{
+  font-size:1.1em!important;
+}
