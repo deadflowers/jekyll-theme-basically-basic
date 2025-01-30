@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.authors                 = ["Michael Rose"]
 
   spec.summary                 = %q{Your new Jekyll default theme.}
-  spec.homepage                = "https://github.com/mmistakes/jekyll-theme-basically-basic"
+  spec.homepage                = "https://github.com/deadflowers/jekyll-theme-basically-basic"
   spec.license                 = "MIT"
 
   spec.metadata["plugin_type"] = "theme"
