@@ -14,18 +14,18 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 lang: en-US
-title: ray kooyenga github
-email: gmc5oz4k7@mozmail.com
+title: # ray kooyenga github
+email: # 
 description: an area for notes and projects
-baseurl: # /
+baseurl: /
 url: # https://rkooyenga.github.io
-author: ray kooyenga
-  name: ray kooyenga
-  twitter: https://x.com/rayktweets
-  picture: https://avatars.githubusercontent.com/u/9654073
-twitter_username: rayktweets
-github_username: rkooyenga
-logo: https://avatars.githubusercontent.com/u/6174603
+author: 
+  name: # ray kooyenga
+  twitter: # https://x.com/rayktweets
+  picture: # https://avatars.githubusercontent.com/u/9654073
+twitter_username: # rayktweets
+github_username: # rkooyenga
+logo: # https://avatars.githubusercontent.com/u/6174603
 search: # true, false (default)
 search_full_content: false # true, false (default)
 search_provider: # lunr (default), algolia
