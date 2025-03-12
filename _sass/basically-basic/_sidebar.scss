@@ -1,0 +1,227 @@
+// Variables (customize these!)
+$sidebar-width: 300px;
+$animation-duration: 0.4s;
+$animation-delay: 0.1s; // Delay between list items
+$easing-curve: cubic-bezier(0.77, 0, 0.175, 1); // "EaseInOutQuart" - smooth and snappy
+$close-button-size: 30px;
+$close-button-color: #333; // Dark grey
+$sidebar-background-color: #f8f8f8; // Slightly off-white (adjust as needed)
+$base-color: #444;       // Medium grey
+$accent-color: #007bff;   // Example accent color (e.g., blue)
+$text-color: #222;       // Very dark grey (for general text)
+$background-color: #fff; // Pure white
+
+// Mixin for fluid typography (keep this if you're using it)
+@mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
+  font-size: $min-font-size;
+
+  @media (min-width: $min-vw) {
+    font-size: calc(#{$min-font-size} + (#{$max-font-size} - #{$min-font-size}) * ((100vw - #{$min-vw}) / (#{$max-vw} - #{$min-vw})));
+  }
+
+  @media (min-width: $max-vw) {
+    font-size: $max-font-size;
+  }
+}
+
+// Breakpoint mixin (keep this)
+@mixin breakpoint($point) {
+    @if $point == $large {
+        @media (min-width: 1024px) { @content; }
+    }
+    @else if $point == $medium {
+        @media (min-width: 768px) { @content; }
+    }
+    // Add more breakpoints as needed
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0; //Start from the left
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+  background-color: $sidebar-background-color;
+  overflow-x: hidden; // Prevent horizontal scrollbars
+  box-shadow: inset -1em 0 5em 0 rgba(0, 0, 0, 0.125); // Keep the shadow
+  transform: translateX(-100%); // Start completely off-screen to the left
+  transition: transform $animation-duration $easing-curve, visibility 0s $animation-duration;  // Transition the transform
+  visibility: hidden;
+
+  &.is--visible {
+      transform: translateX(0); // Bring it into view
+      transition: transform $animation-duration $easing-curve, visibility 0s 0s;
+      visibility: visible;
+  }
+
+  .close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: $close-button-size;
+    height: $close-button-size;
+    cursor: pointer;
+    z-index: 51; // Ensure it's above the sidebar content
+
+    // Style as an "X" (using lines)
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: $close-button-color;
+      transform-origin: center;
+      transition: background-color 0.2s ease; // For hover effect
+    }
+
+    &::before {
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    &::after {
+      transform: translateY(-50%) rotate(-45deg);
+    }
+
+    &:hover::before,
+    &:hover::after {
+      background-color: darken($close-button-color, 15%); // Slightly darker on hover
+    }
+  }
+
+   > .inner {
+      width: 100%;
+      height: 100%;
+      padding: 1.5em;
+
+      @include breakpoint($medium) {
+        padding: 3rem;
+      }
+    }
+
+
+  li {
+    opacity: 0;
+    transform: translateX(-20px); // Start slightly off-screen
+    transition: opacity $animation-duration $easing-curve, transform $animation-duration $easing-curve;
+
+    &.is--moved {
+      opacity: 1;
+      transform: translateX(0);
+    }
+        /* line hover effect */
+        a {
+          position: relative;
+          color: $base-color;
+
+          &::before {
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: -3rem;
+            width: 0;
+            height: 1px;
+            -webkit-transition: width 0.3s cubic-bezier(0, 0, 0.3, 1);
+            transition: width 0.3s cubic-bezier(0, 0, 0.3, 1);
+            background-color: $base-color;
+            content: "";
+          }
+
+          &:hover {
+            color: $accent-color;
+          }
+
+          &:hover::before {
+            width: 2.5rem;
+          }
+        }
+  }
+
+   .menu {
+    @include fluid-type($min-vw, $max-vw, 24px, 48px);
+    position: relative;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    font-weight: bold;
+    line-height: 1;
+
+    a {
+      display: block;
+    }
+
+    /* divider line */
+    &::after {
+      position: absolute;
+      bottom: 0;
+      width: 1.5em;
+      height: 1px;
+      background-color: $base-color;
+      content: "";
+    }
+
+    li {
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .contact-list {
+    @include fluid-type($min-vw, $max-vw, 18px, 24px);
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+
+    li:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
+
+    a {
+      display: block;
+      color: $base-color;
+      text-decoration: none;
+    }
+  }
+}
+//open button
+.sidebar-toggle-wrapper {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 0;
+  right: 0;
+  margin: 1.8125rem 0;
+  padding-right: 1rem;
+  background-color: $background-color;
+  z-index: 10000;
+
+  @include breakpoint($medium) {
+    right: 2rem;
+    padding-right: 0;
+  }
+
+  @include breakpoint($large) {
+    right: 5vw;
+  }
+
+  .toggle-inner {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.sidebar-toggle-label {
+  margin-left: 0.5rem;
+  font-weight: bold;
+  color: $text-color;
+}
+
+//Javascript to handle the animation of the List Items.  Crucial!
+.sidebar.is--visible li {
+  // This applies the staggered delay. VERY IMPORTANT.
+  @for $i from 1 through 20 { // Assuming you won't have > 20 items. Adjust as needed.
+    &:nth-child(#{$i}) {
+      transition-delay: #{$animation-delay * ($i - 1)};
+    }
+  }
+}
