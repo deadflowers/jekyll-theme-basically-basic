@@ -7,45 +7,62 @@
  * Free for personal and commercial use under the MIT license
  * https://github.com/mmistakes/jekyll-theme-basically-basic/blob/master/LICENSE
 */
+document.addEventListener('DOMContentLoaded', function() {
+  const sidebarToggle = document.querySelector('.sidebar-toggle-wrapper');
+  const sidebar = document.querySelector('.sidebar');
+  const closeButton = document.querySelector('.sidebar .close-button'); // Select the button WITHIN the sidebar
+  const sidebarListItems = document.querySelectorAll('.sidebar li');
 
-var menuItems = document.querySelectorAll('#sidebar li');
-
-// Get vendor transition property
-var docElemStyle = document.documentElement.style;
-var transitionProp = typeof docElemStyle.transition == 'string' ?
-  'transition' : 'WebkitTransition';
-
-// Animate sidebar menu items
-function animateMenuItems() {
-  for (var i = 0; i < menuItems.length; i++) {
-    var item = menuItems[i];
-    // Stagger transition with transitionDelay
-    item.style[transitionProp + 'Delay'] = (i * 75) + 'ms';
-    item.classList.toggle('is--moved');
+  if (sidebarToggle && sidebar) { // Check if elements exist
+    sidebarToggle.addEventListener('click', function() {
+      sidebar.classList.add('is--visible');
+       // Add 'is--moved' to each list item.
+      sidebarListItems.forEach(item => {
+          item.classList.add('is--moved');
+        });
+      sidebarToggle.setAttribute('aria-expanded', 'true'); // Accessibility
+    });
   }
-};
 
-var myWrapper = document.querySelector('.wrapper');
-var myMenu = document.querySelector('.sidebar');
-var myToggle = document.querySelector('.toggle');
-var myInitialContent = document.querySelector('.initial-content');
-var mySearchContent = document.querySelector('.search-content');
-var mySearchToggle = document.querySelector('.search-toggle');
-
-// Toggle sidebar visibility
-function toggleClassMenu() {
-  myMenu.classList.add('is--animatable');
-  if (!myMenu.classList.contains('is--visible')) {
-    myMenu.classList.add('is--visible');
-    myToggle.classList.add('open');
-    myWrapper.classList.add('is--pushed');
-  } else {
-    myMenu.classList.remove('is--visible');
-    myToggle.classList.remove('open');
-    myWrapper.classList.remove('is--pushed');
+  if (closeButton && sidebar) { // Check if elements exist
+    closeButton.addEventListener('click', function() {
+      sidebar.classList.remove('is--visible');
+        // Remove 'is--moved' from each list item.  Important for resetting!
+      sidebarListItems.forEach(item => {
+        item.classList.remove('is--moved');
+          });
+      sidebarToggle.setAttribute('aria-expanded', 'false'); // Accessibility
+    });
   }
-}
 
+    // Close sidebar if click outside of the sidebar.
+  document.addEventListener('click', function(event) {
+    if (sidebar && sidebar.classList.contains('is--visible')) {
+        const isClickInsideSidebar = sidebar.contains(event.target);
+        const isClickOnToggle = sidebarToggle.contains(event.target);
+
+      if (!isClickInsideSidebar && !isClickOnToggle) {
+        sidebar.classList.remove('is--visible');
+          sidebarListItems.forEach(item => {
+            item.classList.remove('is--moved');
+              });
+        sidebarToggle.setAttribute('aria-expanded', 'false'); //Accessibility
+      }
+    }
+  });
+
+  // Close the sidebar when escape key press
+  document.addEventListener('keydown', (event) => {
+        if(sidebar.classList.contains('is--visible')){
+            if (event.key === 'Escape') {
+                sidebar.classList.remove('is--visible');
+                sidebarListItems.forEach(item => {
+                    item.classList.remove('is--moved');
+                });
+            }
+        }
+    });
+});
 // Animation smoother
 function OnTransitionEnd() {
   myMenu.classList.remove('is--animatable');
