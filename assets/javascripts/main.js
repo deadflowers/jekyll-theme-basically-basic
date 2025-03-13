@@ -63,31 +63,3 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-// Animation smoother
-function OnTransitionEnd() {
-  myMenu.classList.remove('is--animatable');
-}
-
-myMenu.addEventListener('transitionend', OnTransitionEnd, false);
-myToggle.addEventListener('click', function () {
-  toggleClassMenu();
-  animateMenuItems();
-}, false);
-myMenu.addEventListener('click', function () {
-  toggleClassMenu();
-  animateMenuItems();
-}, false);
-if (mySearchToggle) {
-  mySearchToggle.addEventListener('click', function () {
-    toggleClassSearch();
-  }, false);
-}
-
-// Toggle search input and content visibility
-function toggleClassSearch() {
-  mySearchContent.classList.toggle('is--visible');
-  myInitialContent.classList.toggle('is--hidden');
-  setTimeout(function () {
-    document.querySelector('.search-content input').focus();
-  }, 400);
-}
