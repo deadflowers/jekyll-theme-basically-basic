@@ -36,6 +36,10 @@ algolia:
   powered_by: # true (default), false
 google_analytics: # ga4 g tag
 
+favicon: 
+favicon_big:
+favicon_biggest:
+
 # Build settings
 markdown: kramdown
 theme: jekyll-theme-basically-basic
