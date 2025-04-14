@@ -9,9 +9,10 @@ $overlay-color: #fff !default;
 
 /* minima and variants are too slim in text layout, not ideal for modern screens */
 /* $content-width: 90% !default; */
-$content-width: 100% !default;
+
 $xlarge: 1920px !default;
 $max-width: 1920px !default;
+$max-content-width: $xlarge !default;
 
 /* Syntax highlighting (base16) colors */
 /* Syntax highlighting (base16) colors - Vibrant High Contrast (Terminal Inspired) */
