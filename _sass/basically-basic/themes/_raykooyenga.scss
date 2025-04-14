@@ -11,7 +11,8 @@ $overlay-color: #fff !default;
 /* $content-width: 90% !default; */
 
 $xlarge: 1920px !default;
-$max-width: 1920px !default;
+$max-width: $xlarge !default;
+$max-vw-width: $xlarge !default;
 $max-content-width: $xlarge !default;
 
 /* Syntax highlighting (base16) colors */
