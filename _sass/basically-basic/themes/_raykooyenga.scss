@@ -7,6 +7,9 @@ $code-background-color: #f6f8fa !default;
 $border-color: rgba($text-color, 0.25) !default;
 $overlay-color: #fff !default;
 
+/* minima and variants are too slim in text layout, not ideal for modern screens */
+$content-width: 80%, 768px!default;
+
 /* Syntax highlighting (base16) colors */
 /* Syntax highlighting (base16) colors - Vibrant High Contrast (Terminal Inspired) */
 $base00: #ffffff !default; // White
